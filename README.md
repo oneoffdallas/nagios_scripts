@@ -1,2 +1,2 @@
 # nagios_scripts
-A collection of Nagios scripts. Most should have a corresponding entry on Nagios Exchange. Some may also have a write-up at some point on my website -- http://www.linuxincluded.com.
+A collection of Nagios scripts. All of them *should* have a corresponding entry on Nagios Exchange. At some point, various scripts may also have a write-up on my website -- http://www.linuxincluded.com. 
