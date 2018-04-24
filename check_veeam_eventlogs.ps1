@@ -1,10 +1,11 @@
 #
 # Script name:	check_veeam_eventlogs.ps1
-# Version: 		1.0
+# Version: 		1.1
 # Created on: 	6May2015
+# Modified on:  24April2018
 # Author: 		Dallas Haselhorst
 # Purpose: 		Check Veeam Backup success or failure via event logs 
-#				Note: does NOT use PowerShell plug-in 
+#				Note: this requires PowerShell, however, it does NOT use the Veeam PowerShell plug-in 
 #
 # Copyright:
 #	This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published
@@ -16,16 +17,22 @@
 # Heavily modified from the original script watch-eventlogs.ps1 
 #	written by Aaron Wurthmann (aaron (AT) wurthmann (DOT) com). Nonetheless, thanks Aaron!
 #
-#  For Nagios XI NCPA usage, the following line should be copied to the $ARG1$ text box
-#  -t '<token>' -P <port number> -M 'agent/plugin/check_veeam_eventlogs.ps1/<ArgBackupJobName>/<ArgLastHours>
+#  Older versions of NCPA used the following format, i.e. the following line can be copied to the $ARG1$ text box.
+#  -t '<token>' -P <port number> -M 'agent/plugin/check_veeam_eventlogs.ps1/<ArgBackupJobName>/<ArgLastHours>'
+#  Newer versions of NCPA would use the following format. Note the removal of "agent" and the added "s" to plugin
+#  -t '<token>' -P <port number> -M 'plugins/check_veeam_eventlogs.ps1/<ArgBackupJobName>/<ArgLastHours>'
 #
 #  For testing from the Nagios command line, add './check_ncpa.py -H <IP address>' to the above line
 #	ArgBackupJobName is required. 
+#       *** If your backup job name has special characters or spaces, I would suggest removing them! ***
 #	ArgLastMinutes should be populated with the time to check in minutes, e.g. 60 (for 1 hour), 120 (for 2 hours), 
 #
-#  Examples
+#  Old Example
 #  -t 'TokenPass' -P 5693 -M 'agent/plugin/check_veeam_eventlogs.ps1/Management_VMs/24' 
 #	-- above line would check the last 24 hours of Veeam Backup logs for the job named "Management_VMs"
+#  New Example
+#  -t 'TokenPass' -P 5693 -M 'plugins/check_veeam_eventlogs.ps1/TS01/24'
+#	-- above line would check the last 24 hours of Veeam Backup logs for the job named "TS01"
 
 
 # Pull in arguments
