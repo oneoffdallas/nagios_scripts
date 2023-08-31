@@ -1,8 +1,8 @@
 #
 # Script name:	check_veeam_eventlogs.ps1
-# Version: 		1.1
+# Version: 		1.1a
 # Created on: 	6May2015
-# Modified on:  24April2018
+# Modified on:  31August2023
 # Author: 		Dallas Haselhorst
 # Purpose: 		Check Veeam Backup success or failure via event logs 
 #				Note: this requires PowerShell, however, it does NOT use the Veeam PowerShell plug-in 
