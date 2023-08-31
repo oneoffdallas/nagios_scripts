@@ -39,7 +39,7 @@
 $ArgLogName = "Veeam Backup" # veeam backup event log
 $ArgEntryType = 1,2,3,4 # look for critical, error, warning and informational logs
 $ArgProviderName = "Veeam MP"
-$ArgEventID = 190 # backup job complete event id
+$ArgEventID = 190,790 # backup job complete event IDs : 190 for VMware Backup job, 790 for Linux Agent Backup job
 
 $ArgBackupJobName = $args[0]
 $ArgLastHours = $args[1]
