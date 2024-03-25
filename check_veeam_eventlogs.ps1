@@ -35,12 +35,13 @@
 #  -- above line would check the last 24 hours of Veeam Backup logs for the job named "TS01"
 
 # Pull in arguments
+$NumberOfJobSpaces = 1
 $ArgLogName = "Veeam Backup" # veeam backup event log
 $ArgEntryType = 1,2,3,4 # look for critical, error, warning and informational logs
 $ArgProviderName = "Veeam MP"
 $ArgEventID = 190,790 # backup job complete event IDs : 190 for VMware Backup job, 790 for Linux Agent Backup job
-$ArgBackupJobName = $args[0]
-$ArgLastHours = $args[1]
+$ArgBackupJobName = $args[0..$NumberOfJobSpaces]
+$ArgLastHours = $args[$NumberOfJobSpaces + 1]
 
 #--------------
 
