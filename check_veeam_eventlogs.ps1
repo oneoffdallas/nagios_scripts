@@ -1,8 +1,8 @@
 #
 # Script name:  check_veeam_eventlogs.ps1
-# Version:      1.1b
+# Version:      1.2
 # Created on:   6May2015
-# Modified on:  20March2024
+# Modified on:  25March2024
 # Author:       Dallas Haselhorst
 # Purpose:      Check Veeam Backup success or failure via event logs
 #               Note: this requires PowerShell, however, it does NOT use the Veeam PowerShell plug-in
@@ -35,7 +35,6 @@
 #  -- above line would check the last 24 hours of Veeam Backup logs for the job named "TS01"
 
 # Pull in arguments
-#$NumberOfJobSpaces = 1
 $ArgLogName = "Veeam Backup" # veeam backup event log
 $ArgEntryType = 1,2,3,4 # look for critical, error, warning and informational logs
 $ArgProviderName = "Veeam MP"
