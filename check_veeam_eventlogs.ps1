@@ -2,7 +2,7 @@
 # Script name:  check_veeam_eventlogs.ps1
 # Version:      1.2
 # Created on:   6May2015
-# Modified on:  25March2024
+# Modified on:  26March2024
 # Author:       Dallas Haselhorst
 # Purpose:      Check Veeam Backup success or failure via event logs
 #               Note: this requires PowerShell, however, it does NOT use the Veeam PowerShell plug-in
@@ -18,9 +18,9 @@
 #   written by Aaron Wurthmann (aaron (AT) wurthmann (DOT) com). Nonetheless, thanks Aaron!
 #
 #  Older versions of NCPA used the following format, i.e. the following line can be copied to the $ARG1$ text box.
-#  -t '<token>' -P <port number> -M 'agent/plugin/check_veeam_eventlogs.ps1/<ArgBackupJobName> <ArgLastHours>'
+#  -t '<token>' -P <port number> -M 'agent/plugin/check_veeam_eventlogs.ps1/<ArgBackupJobName>/<ArgLastHours>'
 #  Newer versions of NCPA would use the following format. Note the removal of "agent" and the added "s" to plugin
-#  -t '<token>' -P <port number> -M 'plugins/check_veeam_eventlogs.ps1/<ArgBackupJobName> <ArgLastHours>'
+#  -t '<token>' -P <port number> -M 'plugins/check_veeam_eventlogs.ps1/<ArgBackupJobName>/<ArgLastHours>'
 #
 # For testing from the Nagios command line, add './check_ncpa.py -H <IP address>' to the above line
 #   ArgBackupJobName is required.
@@ -31,7 +31,7 @@
 # -t 'TokenPass' -P 5693 -M 'agent/plugin/check_veeam_eventlogs.ps1/Management_VMs/24'
 #   -- above line would check the last 24 hours of Veeam Backup logs for the job named "Management_VMs"
 # New Example
-#  -t 'TokenPass' -P 5693 -M 'plugins/check_veeam_eventlogs.ps1/TS01 24'
+#  -t 'TokenPass' -P 5693 -M 'plugins/check_veeam_eventlogs.ps1/"TS01" 24'
 #  -- above line would check the last 24 hours of Veeam Backup logs for the job named "TS01"
 
 # Pull in arguments
@@ -39,7 +39,7 @@ $ArgLogName = "Veeam Backup" # veeam backup event log
 $ArgEntryType = 1,2,3,4 # look for critical, error, warning and informational logs
 $ArgProviderName = "Veeam MP"
 $ArgEventID = 190,790 # backup job complete event IDs : 190 for VMware Backup job, 790 for Linux Agent Backup job
-$ArgBackupJobName = $args[0..($args.Length - 2)]
+$ArgBackupJobName = ($args[0..($args.Length - 2)]).trim('"')
 $ArgLastHours = $args[$args.length - 1]
 #--------------
 
